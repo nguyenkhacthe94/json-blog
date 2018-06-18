@@ -40,7 +40,7 @@ public class PostController {
         return modelAndView;
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/{id}")
     public ModelAndView findById(@PathVariable("id") Long id, Pageable pageable) {
         Post post = postService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/post/view");

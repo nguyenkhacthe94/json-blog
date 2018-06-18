@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@JsonIgnoreProperties(value = {"category"})
 @Entity
+@Table(name = "blogs")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -109,5 +109,19 @@ public class Post {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", teaser='" + teaser + '\'' +
+                ", content='" + content + '\'' +
+                ", feature='" + feature + '\'' +
+                ", created=" + created +
+                ", likes=" + likes +
+                ", category=" + category +
+                '}';
     }
 }

@@ -13,6 +13,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<Post> findAll(Pageable pageable) {
+        System.out.println(postRepository.findAll().toString());
         return postRepository.findAll(pageable);
     }
 
