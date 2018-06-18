@@ -6,7 +6,6 @@ import com.codegym.blog.model.PostForm;
 import com.codegym.blog.service.category.CategoryService;
 import com.codegym.blog.service.post.PostService;
 import com.codegym.blog.utils.StorageUtils;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +40,7 @@ public class PostController {
         return modelAndView;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/post/{id}")
     public ModelAndView findById(@PathVariable("id") Long id, Pageable pageable) {
         Post post = postService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/post/view");
@@ -63,6 +62,7 @@ public class PostController {
             String originFileName = postForm.getFeature().getOriginalFilename();
             String randomName = randomCode + StorageUtils.getFileExtension(originFileName);
             postForm.getFeature().transferTo(new File(StorageUtils.FEATURE_LOCATION + "/" + randomName));
+
             Post post = new Post();
             post.setTitle(postForm.getTitle());
             post.setCategory(postForm.getCategory());

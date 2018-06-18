@@ -18,7 +18,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("")
+    @GetMapping("/categories")
     public ModelAndView findAll() {
         Iterable<Category> categories = categoryService.findAll();
         ModelAndView modelAndView = new ModelAndView("/category/list");
@@ -36,15 +36,16 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping("/create")
+    @GetMapping("/categories/create")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/category/create");
         modelAndView.addObject("category", new Category());
         return modelAndView;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/categories/create")
     public ModelAndView saveCategory(@ModelAttribute("category") Category category) {
+        System.out.println(category.getName());
         categoryService.save(category);
         ModelAndView modelAndView = new ModelAndView("/category/create");
         modelAndView.addObject("category", new Category());
@@ -70,7 +71,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}/delete")
-    public ModelAndView showUpdateForm(@PathVariable("id") Long id) {
+    public ModelAndView showDeleteForm(@PathVariable("id") Long id) {
         Category category = categoryService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/category/delete");
         modelAndView.addObject("category", category);

@@ -6,6 +6,7 @@ import com.codegym.blog.service.category.CategoryServiceImpl;
 import com.codegym.blog.service.post.PostService;
 import com.codegym.blog.service.post.PostServiceImpl;
 import com.codegym.blog.utils.StorageUtils;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -75,6 +76,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public TemplateEngine templateEngine() {
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.addDialect(new LayoutDialect());
         return templateEngine;
     }
 
@@ -108,7 +110,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8&useSSL=false");
         dataSource.setUsername( "root" );
         dataSource.setPassword( "aptx4869" );
         return dataSource;
